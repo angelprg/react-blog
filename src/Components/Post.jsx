@@ -1,9 +1,19 @@
 import React from 'react'
 
-const Post = () => {
+const Post = ({title, body}) => {
+
+  const userStyle = {
+    border: '1px solid gray',
+    borderRadius: '10px',
+    boxShadow: '4px 4px 20px #555',
+    backgroundColor: '#FFF',
+    margin: '20px',
+  }
+
   return (
-    <div>
-      
+    <div style={userStyle} >
+      <h3>{title}</h3>
+      <p>{body}</p>
     </div>
   )
 }
