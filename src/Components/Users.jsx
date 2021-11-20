@@ -14,7 +14,16 @@ const Users = () => {
         setUsers(data);
       });
     });
-  }, [buscar]);
+  }, []);
+
+  const searchUser = (event) => {
+    event.preventDefault();
+    fetch(`${endpoint}?name=${buscar}`).then((res) => {
+      res.json().then((data) => {
+        setUsers(data);
+      });
+    });
+  }
 
   // console.log("renderizando componente");
   // console.log("buscar: ", buscar);
@@ -27,14 +36,17 @@ const Users = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        value={buscar}
-        onChange={(e) => setBuscar(e.target.value)}
-      />
+      <form onSubmit={searchUser}>
+        <input
+          type="text"
+          value={buscar}
+          onChange={(e) => setBuscar(e.target.value)}
+        />
+        <input type="submit" value="Enviar" />
+      </form>
       <div style={usersStyle}>
         {users
-          .filter((user) => user.website.includes(".info"))
+          // .filter((user) => user.name.includes(buscar))
           .map(({ id, name, username, email, website }) => (
             <User
               key={id}
